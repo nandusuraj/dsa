@@ -1,0 +1,9 @@
+n=int(input())
+newnum=0
+while(n!=0):
+    digit=n%10
+    newnum=newnum*10+digit
+    n=n//10
+print(newnum)
+
+

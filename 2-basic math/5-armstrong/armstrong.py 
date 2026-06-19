@@ -1,0 +1,22 @@
+#here i have taken armstrong number to be a number wherein a number is equal to the sum of its digits to the power of the number of digits 
+
+
+
+n=int(input())
+temp=n
+count=0
+while(n!=0):
+    count=count+1
+    n//=10 
+
+n=temp
+sum=0
+while(n!=0):
+    digit=n%10
+    sum=sum+(digit**count)
+    n//=10
+if(sum==temp):
+    print("Is armstrong")
+
+else:
+    print("Is not armstrong")

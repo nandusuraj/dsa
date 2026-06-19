@@ -3,5 +3,6 @@
     "editor.formatOnSave": true,
     "code-runner.executorMap": {
         "cpp": "mkdir -p /workspaces/dsa/bin && cd $dir && g++ \"$fileName\" -o /workspaces/dsa/bin/$fileNameWithoutExt && /workspaces/dsa/bin/$fileNameWithoutExt"
-    }
+    },
+    "python.REPL.enableREPLSmartSend": false
 }

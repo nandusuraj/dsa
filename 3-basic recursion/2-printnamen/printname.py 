@@ -1,0 +1,9 @@
+def printn(i,name,n):
+    if(i>n):
+        return
+    print(name,end="\n")
+    printn(i+1,name,n)
+
+n=int(input())
+name=input()
+printn(1,name,n)

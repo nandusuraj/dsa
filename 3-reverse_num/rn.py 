@@ -1,4 +1,0 @@
-n=int(input())
-newnum=0
-while(n!=0):
-
