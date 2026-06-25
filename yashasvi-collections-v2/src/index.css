@@ -1,0 +1,181 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap");
+@import "tailwindcss";
+
+/* ───────────────────────────────────────────────
+   Yashasvi Collections — Luxury Design System
+   Palette: deep maroon (zari pallu) + antique gold
+   (zari thread) + warm ivory (raw silk)
+   ─────────────────────────────────────────────── */
+
+:root {
+  /* --- Core brand palette (used by App.jsx via Tailwind arbitrary values
+     AND available here as vars for anything CSS-level) --- */
+  --maroon: #7B1E2B;
+  --maroon-deep: #5C0F1B;
+  --maroon-ink: #2A0E13;
+  --gold: #C9A227;
+  --gold-soft: #E8C766;
+  --ink: #221A1D;
+  --ivory: #FFF8F2;
+  --sand: #F5EBDD;
+  --sand-line: #E8D9C4;
+
+  /* --- Generic tokens (kept from the original template so any
+     component still referencing var(--text), var(--accent), etc.
+     continues to resolve correctly — now mapped to the luxury palette) --- */
+  --text: #6b5d5f;
+  --text-h: var(--ink);
+  --bg: var(--ivory);
+  --border: var(--sand-line);
+  --code-bg: var(--sand);
+  --accent: var(--maroon);
+  --accent-bg: rgba(123, 30, 43, 0.08);
+  --accent-border: rgba(123, 30, 43, 0.4);
+  --social-bg: rgba(245, 235, 221, 0.6);
+  --shadow:
+    rgba(42, 14, 19, 0.12) 0 10px 30px -6px, rgba(42, 14, 19, 0.06) 0 4px 10px -4px;
+  --shadow-gold: rgba(201, 162, 39, 0.25) 0 8px 24px -6px;
+
+  /* --- Typography --- */
+  --sans: "Jost", system-ui, "Segoe UI", Roboto, sans-serif;
+  --heading: "Cormorant Garamond", "Times New Roman", serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 17px/1.65 var(--sans);
+  letter-spacing: 0.15px;
+  color-scheme: light;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+/* The storefront is an intentional, branded light experience —
+   it should not flip to a dark theme on system preference. */
+
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* --- Heading system: Tailwind's `font-serif` utility (used throughout
+   App.jsx) now resolves to the real display serif instead of the
+   system fallback. --- */
+.font-serif,
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading);
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+  color: var(--text-h);
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+/* --- Selection & focus: small luxury details --- */
+::selection {
+  background: var(--gold-soft);
+  color: var(--maroon-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* --- Scrollbar (webkit) — thin gold-on-ivory, matches the brand
+   instead of the default OS scrollbar --- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--sand);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 999px;
+  border: 2px solid var(--sand);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--maroon);
+}
+
+/* --- Signature motif: thin gold corner brackets, evoking a saree's
+   zari border. Applied via .lux-frame on product imagery (see
+   App.jsx). Pure CSS, no markup beyond the class. --- */
+.lux-frame {
+  position: relative;
+}
+.lux-frame::before,
+.lux-frame::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid var(--gold-soft);
+  opacity: 0;
+  transition: opacity 0.5s ease, width 0.5s ease, height 0.5s ease;
+  z-index: 20;
+  pointer-events: none;
+}
+.lux-frame::before {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+}
+.lux-frame::after {
+  bottom: 10px;
+  right: 10px;
+  border-left: none;
+  border-top: none;
+}
+.lux-frame:hover::before,
+.lux-frame:hover::after {
+  opacity: 1;
+  width: 28px;
+  height: 28px;
+}
+
+/* --- Reduced motion: respect OS preference globally --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
